@@ -35,3 +35,21 @@ jobs:
         run: |
           npm install
           npm run buid --if-present
+
+
+  #    - name: correr el linter
+  #      run: npm run lint
+
+      - name: corremos las pruebas unitarias y de inteegracion con su covertura
+        run: npm run test:conv
+
+      - name: corremos las pruebas end-to-end
+        run: npm run test:e2e
+
+      - name: actualizamos el artefacto con el reporte de covertura de los tsts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+          if-no-fies-found: error
